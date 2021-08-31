@@ -98,6 +98,8 @@ const data = [
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
 
+    
+
     {three separate paragraph elements}
 
     <span class="expandButton">+</span>
@@ -114,3 +116,46 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+  const div = document.createElement('div');
+  const h2 = document.createElement('h2');
+  const p1 = document.createElement('date');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const p4 = document.createElement('p');
+  const button = document.createElement('span');
+  
+  div.appendChild(h2);
+  div.appendChild(p1);
+  div.appendChild(p2);
+  div.appendChild(p3);
+  div.appendChild(p4);
+  div.appendChild(button);
+
+  button.classList.add('expandButton');
+
+  button.addEventListener('click', event => {
+    div.classList.toggle('article-open');
+  })
+
+  h2.textContent = title;
+  p1.textContent = date;
+  p2.textContent = firstParagraph;
+  p3.textContent = secondParagraph;
+  p4.textContent = thirdParagraph;
+
+  return div;
+
+
+}
+
+const articles = document.querySelector('.articles');
+const articleElements = data.map(art => {
+  return articleMaker(art);
+});
+
+articleElements.forEach(art => {
+  articles.appendChild(art);
+})
+
+
